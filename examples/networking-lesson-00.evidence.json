@@ -1,0 +1,80 @@
+{
+  "protocolVersion": "0.1.0",
+  "lessonId": "networking.lesson-00.link-vs-reachability",
+  "runId": "synthetic-run-0001",
+  "startedAt": "2026-06-29T02:00:00Z",
+  "completedAt": "2026-06-29T02:18:00Z",
+  "environment": {
+    "mode": "simulated",
+    "platform": "Synthetic reference example",
+    "sourceCommit": "example",
+    "tools": [
+      "ip",
+      "ping"
+    ]
+  },
+  "stages": [
+    {
+      "stageId": "predict.reachability",
+      "response": "The lights only prove a physical link. Ping still needs network-layer addressing and a valid path.",
+      "artifacts": [
+        {
+          "type": "learner-response",
+          "description": "Synthetic pre-observation prediction."
+        }
+      ],
+      "status": "pass",
+      "evaluatedBy": "human",
+      "notes": "Reference-only judgment; this is not a real learner record."
+    },
+    {
+      "stageId": "observe.blank-link",
+      "response": "Both interfaces are up, but neither has an IPv4 address and the target is unreachable.",
+      "artifacts": [
+        {
+          "type": "system-state",
+          "description": "Synthetic interface state: link-up with no IPv4 address."
+        },
+        {
+          "type": "command-output",
+          "description": "Synthetic failed ping result."
+        }
+      ],
+      "status": "pass",
+      "evaluatedBy": "hybrid"
+    },
+    {
+      "stageId": "explain.layers",
+      "response": "The cable and interfaces established the lower-layer link, but that does not create an IPv4 identity or route.",
+      "artifacts": [
+        {
+          "type": "learner-response",
+          "description": "Synthetic causal explanation."
+        }
+      ],
+      "status": "pass",
+      "evaluatedBy": "human"
+    },
+    {
+      "stageId": "transfer.changed-case",
+      "response": "I would compare both IP prefixes and route tables. Link state is already established, so replacing the cable is not the first test.",
+      "artifacts": [
+        {
+          "type": "learner-response",
+          "description": "Synthetic response to a changed subnet scenario."
+        }
+      ],
+      "status": "pass",
+      "evaluatedBy": "human"
+    }
+  ],
+  "summary": {
+    "status": "pass",
+    "decisionBasis": "The synthetic trace contains prediction, observation, causal explanation, and transfer evidence for the bounded claim.",
+    "limitations": [
+      "This record is synthetic and demonstrates the interchange format only.",
+      "No claim about educational effectiveness is made."
+    ]
+  }
+}
+

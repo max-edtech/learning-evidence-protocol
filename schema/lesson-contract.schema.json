@@ -1,0 +1,196 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://max-edtech.github.io/learning-evidence-protocol/schema/lesson-contract.schema.json",
+  "title": "Learning Evidence Protocol lesson contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "protocolVersion",
+    "lessonId",
+    "title",
+    "learningClaim",
+    "scenario",
+    "evidenceStages",
+    "successRule",
+    "provenance"
+  ],
+  "properties": {
+    "protocolVersion": {
+      "type": "string",
+      "const": "0.1.0"
+    },
+    "lessonId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "learningClaim": {
+      "type": "string",
+      "minLength": 20
+    },
+    "scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "initialState",
+        "learnerTask"
+      ],
+      "properties": {
+        "initialState": {
+          "type": "string",
+          "minLength": 1
+        },
+        "learnerTask": {
+          "type": "string",
+          "minLength": 1
+        },
+        "environmentNotes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "evidenceStages": {
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "$ref": "#/$defs/evidenceStage"
+      }
+    },
+    "successRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requiredStageIds",
+        "reviewPolicy"
+      ],
+      "properties": {
+        "requiredStageIds": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "reviewPolicy": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "author",
+        "license"
+      ],
+      "properties": {
+        "author": {
+          "type": "string",
+          "minLength": 1
+        },
+        "license": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "sourceCommit": {
+          "type": "string",
+          "minLength": 7
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "evidenceStage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "prompt",
+        "expectedEvidence",
+        "evaluation"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "prediction",
+            "observation",
+            "explanation",
+            "transfer"
+          ]
+        },
+        "prompt": {
+          "type": "string",
+          "minLength": 1
+        },
+        "expectedEvidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "evaluation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "method",
+            "passCondition"
+          ],
+          "properties": {
+            "method": {
+              "type": "string",
+              "enum": [
+                "deterministic",
+                "human-rubric",
+                "hybrid"
+              ]
+            },
+            "passCondition": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "systemArtifacts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "hardwareOnly": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    }
+  }
+}
+

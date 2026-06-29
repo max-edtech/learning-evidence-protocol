@@ -1,0 +1,92 @@
+{
+  "protocolVersion": "0.1.0",
+  "lessonId": "networking.lesson-00.link-vs-reachability",
+  "title": "Green lights are not end-to-end proof",
+  "learningClaim": "The learner distinguishes a physical Ethernet link from IPv4 reachability between two nodes.",
+  "scenario": {
+    "initialState": "Two nodes are connected by one link. Both interfaces report link-up, but neither interface has an IPv4 address.",
+    "learnerTask": "Predict, observe, and explain whether the nodes can reach one another before and after IPv4 addresses are assigned.",
+    "environmentNotes": [
+      "A hardware run can expose carrier, speed, duplex, and Ethernet padding.",
+      "A virtual veth run preserves separate Linux network stacks but not physical-layer behavior."
+    ]
+  },
+  "evidenceStages": [
+    {
+      "id": "predict.reachability",
+      "kind": "prediction",
+      "prompt": "Both Ethernet ports show a green link light. Does that prove a ping between the nodes will succeed? Explain your prediction.",
+      "expectedEvidence": [
+        "The learner states that link-up alone does not prove IP reachability.",
+        "The learner identifies addressing or routing as a separate requirement."
+      ],
+      "evaluation": {
+        "method": "human-rubric",
+        "passCondition": "The response separates physical link state from end-to-end IP communication."
+      }
+    },
+    {
+      "id": "observe.blank-link",
+      "kind": "observation",
+      "prompt": "Inspect the interfaces and attempt the ping before assigning IPv4 addresses. What is present, and what is missing?",
+      "expectedEvidence": [
+        "The interface is operational at the link layer.",
+        "No usable IPv4 address or route exists for the target.",
+        "The ping does not establish reachability."
+      ],
+      "evaluation": {
+        "method": "hybrid",
+        "passCondition": "System state confirms link-up and absent IPv4 configuration; the learner identifies both."
+      },
+      "systemArtifacts": [
+        "interface state",
+        "address table",
+        "route table",
+        "ping result"
+      ]
+    },
+    {
+      "id": "explain.layers",
+      "kind": "explanation",
+      "prompt": "Why can the physical connection be healthy while the ping still fails?",
+      "expectedEvidence": [
+        "The explanation treats physical connectivity and network-layer identity as different conditions.",
+        "The explanation does not blame the cable merely because ping failed."
+      ],
+      "evaluation": {
+        "method": "human-rubric",
+        "passCondition": "The causal explanation distinguishes what has been proven from what has not."
+      }
+    },
+    {
+      "id": "transfer.changed-case",
+      "kind": "transfer",
+      "prompt": "A new pair of machines shows link-up, and both have IPv4 addresses, but they are configured on incompatible subnets with no router. What should you inspect next, and why?",
+      "expectedEvidence": [
+        "The learner does not return to Layer 1 as the first diagnosis.",
+        "The learner inspects address prefixes and routing because the changed case already establishes link state."
+      ],
+      "evaluation": {
+        "method": "human-rubric",
+        "passCondition": "The learner transfers the layered model to a changed failure rather than repeating the original command sequence."
+      }
+    }
+  ],
+  "successRule": {
+    "requiredStageIds": [
+      "predict.reachability",
+      "observe.blank-link",
+      "explain.layers",
+      "transfer.changed-case"
+    ],
+    "reviewPolicy": "All required stages need evidence. Any ambiguous explanation remains review rather than being silently promoted to pass."
+  },
+  "provenance": {
+    "author": "max-edtech",
+    "license": "MPL-2.0",
+    "sourceUrl": "https://github.com/ngrok/little-internet/tree/joelhans/lesson-00-and-diary/lessons/00",
+    "sourceCommit": "joelhans/lesson-00-and-diary",
+    "notes": "Independent synthetic evidence example inspired by the upstream lesson. No upstream scripts, learner records, or packet captures are redistributed."
+  }
+}
+

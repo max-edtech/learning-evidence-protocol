@@ -1,0 +1,17 @@
+{
+  "name": "learning-evidence-protocol",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Schemas and examples for observable learning evidence.",
+  "type": "module",
+  "scripts": {
+    "test": "node scripts/validate-examples.mjs"
+  },
+  "devDependencies": {
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

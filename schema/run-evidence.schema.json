@@ -1,0 +1,192 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://max-edtech.github.io/learning-evidence-protocol/schema/run-evidence.schema.json",
+  "title": "Learning Evidence Protocol run evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "protocolVersion",
+    "lessonId",
+    "runId",
+    "startedAt",
+    "completedAt",
+    "environment",
+    "stages",
+    "summary"
+  ],
+  "properties": {
+    "protocolVersion": {
+      "type": "string",
+      "const": "0.1.0"
+    },
+    "lessonId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "runId": {
+      "type": "string",
+      "minLength": 8
+    },
+    "startedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "completedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "platform",
+        "sourceCommit"
+      ],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "hardware",
+            "virtual",
+            "simulated"
+          ]
+        },
+        "platform": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceCommit": {
+          "type": "string",
+          "minLength": 7
+        },
+        "tools": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "stages": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/stageEvidence"
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "decisionBasis"
+      ],
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/status"
+        },
+        "decisionBasis": {
+          "type": "string",
+          "minLength": 1
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      }
+    }
+  },
+  "$defs": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "pass",
+        "fail",
+        "review",
+        "not-run"
+      ]
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "description"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "learner-response",
+            "command-output",
+            "packet-capture",
+            "system-state",
+            "review-note",
+            "other"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "uri": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "stageEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stageId",
+        "response",
+        "artifacts",
+        "status",
+        "evaluatedBy"
+      ],
+      "properties": {
+        "stageId": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+        },
+        "response": {
+          "type": "string"
+        },
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/artifact"
+          }
+        },
+        "status": {
+          "$ref": "#/$defs/status"
+        },
+        "evaluatedBy": {
+          "type": "string",
+          "enum": [
+            "system",
+            "human",
+            "hybrid",
+            "none"
+          ]
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
+

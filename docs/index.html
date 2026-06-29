@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="An interactive reference demo of the Learning Evidence Protocol."
+    >
+    <title>Learning Evidence Protocol</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="wordmark" href="./" aria-label="Learning Evidence Protocol home">
+        <span class="wordmark-mark" aria-hidden="true">LEP</span>
+        <span>Learning Evidence Protocol</span>
+      </a>
+      <nav aria-label="Project links">
+        <a href="https://github.com/max-edtech/learning-evidence-protocol">GitHub</a>
+        <a href="https://github.com/max-edtech/learning-evidence-protocol/blob/main/SPEC.md">Spec</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Observable learning evidence</p>
+        <h1>A correct answer is only a green link light.</h1>
+        <p class="hero-copy">
+          It proves that something happened. It does not prove that
+          understanding is connected end to end.
+        </p>
+        <div class="evidence-path" aria-label="Four evidence stages">
+          <span>Prediction</span>
+          <span aria-hidden="true">→</span>
+          <span>Observation</span>
+          <span aria-hidden="true">→</span>
+          <span>Explanation</span>
+          <span aria-hidden="true">→</span>
+          <span>Transfer</span>
+        </div>
+      </section>
+
+      <section class="demo-section" aria-labelledby="demo-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Reference trace · Networking</p>
+            <h2 id="demo-title">Can two connected machines actually talk?</h2>
+          </div>
+          <span class="privacy-note">Synthetic · no data collected</span>
+        </div>
+
+        <div class="lab">
+          <div class="network-stage" aria-label="Two linked network nodes">
+            <div class="node">
+              <span class="node-light" aria-hidden="true"></span>
+              <strong>node-a</strong>
+              <small>eth0 · link up</small>
+            </div>
+            <div class="cable" aria-hidden="true">
+              <span></span>
+            </div>
+            <div class="node">
+              <span class="node-light" aria-hidden="true"></span>
+              <strong>node-b</strong>
+              <small>eth0 · link up</small>
+            </div>
+          </div>
+
+          <div class="prompt-panel" aria-live="polite">
+            <div class="progress-row">
+              <span id="stage-label">Stage 1 of 4</span>
+              <div class="progress-track" aria-hidden="true">
+                <span id="progress-bar"></span>
+              </div>
+            </div>
+            <p id="stage-kind" class="stage-kind">Prediction</p>
+            <h3 id="question"></h3>
+            <p id="context" class="context"></p>
+            <div id="choices" class="choices"></div>
+            <div id="feedback" class="feedback" hidden></div>
+            <button id="next-button" class="next-button" type="button" hidden>
+              Continue the trace
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="trace-section" class="trace-section" hidden>
+        <div>
+          <p class="eyebrow">What changed?</p>
+          <h2>Not the command. The learner’s model.</h2>
+          <p>
+            The final answer matters because the trace preserves what the
+            learner expected, noticed, explained, and transferred.
+          </p>
+        </div>
+        <pre id="trace-output" aria-label="Learning evidence JSON"></pre>
+      </section>
+
+      <section class="principles">
+        <article>
+          <span>01</span>
+          <h2>Bound the claim</h2>
+          <p>
+            “Understands networking” is vague. Distinguishing physical link
+            state from IP reachability is observable.
+          </p>
+        </article>
+        <article>
+          <span>02</span>
+          <h2>Preserve uncertainty</h2>
+          <p>
+            Missing or ambiguous evidence stays in review. It is never silently
+            upgraded to a pass.
+          </p>
+        </article>
+        <article>
+          <span>03</span>
+          <h2>Minimize data</h2>
+          <p>
+            The protocol needs evidence for a claim—not identity, biometrics,
+            or a surveillance feed.
+          </p>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      <p>Experimental draft · MPL-2.0</p>
+      <p>
+        Inspired by
+        <a href="https://github.com/ngrok/little-internet">little-internet</a>.
+        Independent and not endorsed by ngrok.
+      </p>
+    </footer>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
+
