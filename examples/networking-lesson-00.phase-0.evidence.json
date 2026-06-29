@@ -1,0 +1,82 @@
+{
+  "protocolVersion": "0.1.0",
+  "lessonId": "networking.lesson-00.link-vs-reachability",
+  "runId": "phase-0-a5564a3-20260629",
+  "startedAt": "2026-06-29T02:41:00Z",
+  "completedAt": "2026-06-29T02:45:00Z",
+  "environment": {
+    "mode": "virtual",
+    "platform": "Apple Silicon macOS 26.5.1, Colima 0.10.3, Ubuntu Noble arm64",
+    "sourceCommit": "a5564a3540807cfa6fd24886161dcaf55c81a80a",
+    "tools": [
+      "ip",
+      "ping",
+      "tcpdump",
+      "tmux",
+      "python3"
+    ]
+  },
+  "stages": [
+    {
+      "stageId": "predict.reachability",
+      "response": "",
+      "artifacts": [],
+      "status": "not-run",
+      "evaluatedBy": "none",
+      "notes": "The operator had already inspected the source. No valid naive learner prediction was collected."
+    },
+    {
+      "stageId": "observe.blank-link",
+      "response": "Verified link-up and IPv6 link chatter with no IPv4 address. Ping and route lookup returned Network is unreachable before addressing.",
+      "artifacts": [
+        {
+          "type": "system-state",
+          "description": "Both veth interfaces were up with no IPv4 address."
+        },
+        {
+          "type": "command-output",
+          "description": "Before addressing, ping and route lookup returned Network is unreachable."
+        },
+        {
+          "type": "packet-capture",
+          "description": "Synthetic link-up capture containing 10 IPv6 frames.",
+          "sha256": "0c688a0f200f4f66a6eb80370b9af38642f32f07464af1e18f4f8fcd1474f4bb"
+        },
+        {
+          "type": "packet-capture",
+          "description": "Synthetic six-frame ARP and ICMP exchange after addressing.",
+          "sha256": "f6450da29a02797539b0f6bbba63d331a405cdfe81307b0f7630d720cc018eca"
+        }
+      ],
+      "status": "pass",
+      "evaluatedBy": "system",
+      "notes": "Operational evidence passed; this does not establish learner understanding."
+    },
+    {
+      "stageId": "explain.layers",
+      "response": "",
+      "artifacts": [],
+      "status": "not-run",
+      "evaluatedBy": "none",
+      "notes": "No learner explanation was collected during the technical reproduction."
+    },
+    {
+      "stageId": "transfer.changed-case",
+      "response": "",
+      "artifacts": [],
+      "status": "not-run",
+      "evaluatedBy": "none",
+      "notes": "No changed-case learner response was collected during the technical reproduction."
+    }
+  ],
+  "summary": {
+    "status": "review",
+    "decisionBasis": "The virtual lab reproduced the target system states, but the bounded learning claim cannot pass without prediction, explanation, and transfer evidence from a learner.",
+    "limitations": [
+      "This was an operator reproduction, not a learner study.",
+      "No Raspberry Pi hardware or physical-layer behavior was tested.",
+      "The fresh VM required manual installation of ping, tcpdump, and tmux.",
+      "The optional dashboard required an explicit TERM=xterm-256color override under Colima SSH."
+    ]
+  }
+}
