@@ -20,6 +20,7 @@ inspectable evidence.
 - [Run evidence schema](./schema/run-evidence.schema.json)
 - [Networking Lesson 00 example](./examples/networking-lesson-00.contract.json)
 - [Phase 0 field report: Apple Silicon → Colima → Lesson 00](./research/2026-06-29-little-internet-phase-0.md)
+- [Phase 0 follow-up: latest upstream rerun and coupling boundary](./research/2026-06-30-little-internet-phase-0-rerun.md)
 
 ## The evidence loop
 

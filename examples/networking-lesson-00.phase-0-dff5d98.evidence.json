@@ -1,0 +1,82 @@
+{
+  "protocolVersion": "0.1.0",
+  "lessonId": "networking.lesson-00.link-vs-reachability",
+  "runId": "phase-0-dff5d98-20260630",
+  "startedAt": "2026-06-30T07:03:03Z",
+  "completedAt": "2026-06-30T07:04:50Z",
+  "environment": {
+    "mode": "virtual",
+    "platform": "Apple Silicon macOS 26.5.1, Colima 0.10.3 using Apple Virtualization.framework, Ubuntu Noble Linux 6.8 arm64",
+    "sourceCommit": "dff5d981e9386e16aca750261837d4c3b18d3e84",
+    "tools": [
+      "ip",
+      "ping",
+      "tcpdump"
+    ]
+  },
+  "stages": [
+    {
+      "stageId": "predict.reachability",
+      "response": "",
+      "artifacts": [],
+      "status": "not-run",
+      "evaluatedBy": "none",
+      "notes": "This was an operator rerun after prior exposure. No naive learner prediction was possible."
+    },
+    {
+      "stageId": "observe.blank-link",
+      "response": "The virtual link emitted IPv6 traffic before either side had an IPv4 address. Ping and route lookup returned Network is unreachable. After assigning same-subnet IPv4 identities, routes resolved to eth0 and the capture showed ARP before successful ICMP.",
+      "artifacts": [
+        {
+          "type": "packet-capture",
+          "description": "Fifteen-frame virtual link-up capture with IPv6 neighbor solicitation, multicast listener reports, and router solicitation.",
+          "sha256": "9fd16167b9d277c4415ea18ed7130bc6fd151041c2fb6f844a196a0d6df0706c"
+        },
+        {
+          "type": "command-output",
+          "description": "Before addressing, eth0 had no IPv4 inet line and ping plus route lookup returned Network is unreachable."
+        },
+        {
+          "type": "system-state",
+          "description": "After assigning 10.10.0.1/24 and 10.10.0.2/24, each route lookup resolved to dev eth0 with the expected source address."
+        },
+        {
+          "type": "packet-capture",
+          "description": "Six-frame virtual capture containing ARP who-has, ARP is-at, and two ICMP echo request and reply pairs.",
+          "sha256": "f139ab54381e2e0bf91b529b260ae69e190fb5df615cc582f342ffe0133284e2"
+        }
+      ],
+      "status": "review",
+      "evaluatedBy": "system",
+      "notes": "The operational causal sequence was reproduced. Stage status remains review because system evidence is not learner-understanding evidence."
+    },
+    {
+      "stageId": "explain.layers",
+      "response": "",
+      "artifacts": [],
+      "status": "not-run",
+      "evaluatedBy": "none",
+      "notes": "No independent learner explanation was collected during the operator rerun."
+    },
+    {
+      "stageId": "transfer.changed-case",
+      "response": "",
+      "artifacts": [],
+      "status": "not-run",
+      "evaluatedBy": "none",
+      "notes": "No changed-case learner response was collected during the operator rerun."
+    }
+  ],
+  "summary": {
+    "status": "review",
+    "decisionBasis": "Latest upstream Lesson 00 reproduced the target L2/L3 causal states, but an operator rerun cannot establish the bounded learning claim without locked learner prediction, explanation, and changed-case transfer evidence.",
+    "limitations": [
+      "This was an operator reproduction after source exposure, not a learner study.",
+      "The VM retained tools installed during the previous run, so this was not a fresh-environment setup test.",
+      "No Raspberry Pi hardware, physical carrier, speed, duplex, or real Pi link-up chatter was tested.",
+      "tshark was unavailable and the lesson used its tcpdump fallback.",
+      "The optional interactive dashboard was not exercised.",
+      "The packet captures are identified by digest but are not redistributed in this repository."
+    ]
+  }
+}
