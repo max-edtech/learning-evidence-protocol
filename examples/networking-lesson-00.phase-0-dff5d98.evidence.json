@@ -21,7 +21,7 @@
       "artifacts": [],
       "status": "not-run",
       "evaluatedBy": "none",
-      "notes": "This was an operator rerun after prior exposure. No naive learner prediction was possible."
+      "notes": "This was an operator rerun after prior exposure. No naive learner prediction was possible. Because no prediction was captured before observation, prediction-before-reveal ordering was not exercised."
     },
     {
       "stageId": "observe.blank-link",
@@ -64,19 +64,22 @@
       "artifacts": [],
       "status": "not-run",
       "evaluatedBy": "none",
-      "notes": "No changed-case learner response was collected during the operator rerun."
+      "notes": "No changed-case learner response was collected during the operator rerun. No fresh changed-case transfer was run, so transfer evidence and its ordering were not tested."
     }
   ],
   "summary": {
     "status": "review",
-    "decisionBasis": "Latest upstream Lesson 00 reproduced the target L2/L3 causal states, but an operator rerun cannot establish the bounded learning claim without locked learner prediction, explanation, and changed-case transfer evidence.",
+    "decisionBasis": "Latest upstream Lesson 00 reproduced the target L2/L3 causal states, but an operator rerun cannot establish the bounded learning claim without locked learner prediction, explanation, and changed-case transfer evidence. No calibrated adjudication was performed, and the review-to-verdict step is unvalidated.",
     "limitations": [
       "This was an operator reproduction after source exposure, not a learner study.",
       "The VM retained tools installed during the previous run, so this was not a fresh-environment setup test.",
       "No Raspberry Pi hardware, physical carrier, speed, duplex, or real Pi link-up chatter was tested.",
       "tshark was unavailable and the lesson used its tcpdump fallback.",
       "The optional interactive dashboard was not exercised.",
-      "The packet captures are identified by digest but are not redistributed in this repository."
+      "The packet captures are identified by digest but are not redistributed in this repository.",
+      "No learner response was captured before observation, so the protocol's prediction-before-reveal ordering was not exercised in this run.",
+      "No calibrated human rubric, blind review, or validated automated adjudication was performed; the review-to-verdict step remains unvalidated.",
+      "Timestamps document the operator run but are not tamper-evident and do not by themselves establish ordering."
     ]
   }
 }

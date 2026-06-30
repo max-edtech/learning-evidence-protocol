@@ -128,23 +128,48 @@ The operator had prior source exposure, and no valid learner prediction,
 explanation, changed-case response, or delayed retention response was collected.
 The learning claim therefore remains `review`.
 
+LEP's role here is not to measure understanding directly. It records the limits
+of the available evidence and prevents this operator run from being silently
+promoted into a supported learning claim.
+
 Synthetic-agent traces may test prompt leakage, storage, schema validity, and
 false-pass guardrails. They must remain labeled synthetic and cannot substitute
 for human learner evidence.
 
+## Temporal ordering and adjudication
+
+This run did not exercise the protocol's temporal ordering. Locking a prediction
+before observation, presenting a fresh changed case, and delaying retention are
+design requirements that were not performed or verified here. The recorded
+timestamps document the operator run; they are not tamper-evident and do not by
+themselves establish ordering.
+
+No calibrated human rubric, blind review, or validated automated adjudication
+was applied. The review-to-verdict step is itself unvalidated, and automated
+commentary does not promote evidence on its own. Adjudication remains an open
+problem rather than a completed capability.
+
 ## Next human run
 
 Use a participant who has not seen the output, or explicitly record prior
-exposure. Lock these responses in order:
+exposure. Lock the sequence in order:
 
-1. prediction before system output;
-2. decisive observation and its limits;
-3. explanation of address, route, and ARP;
-4. fresh firewall, service-port, and incompatible-subnet cases;
-5. a delayed unresolved-ARP case.
+```text
+commit a prediction
+→ reveal the observation
+→ lock the explanation
+→ run a fresh changed case
+→ collect delayed retention
+→ obtain calibrated human review
+```
 
 Every response remains `review` until calibrated human evaluation. Missing
 retention evidence is missing evidence, not failure and not mastery.
+
+A first single-learner run (`n=1`) would test the protocol and field method:
+whether evidence can be captured and ordered as specified. It would not
+establish educational effectiveness, prove that the lesson teaches, or prove
+that a learner understood.
 
 ## Independence and attribution
 
