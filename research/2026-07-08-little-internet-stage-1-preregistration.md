@@ -78,8 +78,8 @@ not surviving the changed case.
 - The trace is recorded against the
   [run-evidence schema](../schema/run-evidence.schema.json); ambiguous
   evidence stays `review` and is never auto-promoted to "understood".
-- **Deliverable A (to the lesson author):** stall points and the learner's
-  questions verbatim.
+- **Deliverable A (to the lesson author):** stall points and anonymized
+  excerpts of the learner's questions.
 - **Deliverable B (to LEP):** the anonymized evidence record, published
   under `examples/`.
 
