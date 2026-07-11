@@ -1,9 +1,17 @@
 # Stage 1 pre-registration: first genuine-beginner run of Lesson 00
 
 Date: 2026-07-08
-Status: Pre-registered; the run has **not** been performed
+Status: Pre-registered; **amended before any learner run on 2026-07-11**
 Upstream: [`ngrok/little-internet`](https://github.com/ngrok/little-internet) `main` @ `afa93c7`
 (first upstream commit range with `lessons/00/manifest.json`, schema_version 1)
+
+> The original design below is preserved as the pre-amendment record. The
+> current, consolidated design is the
+> [2026-07-11 Stage 1 amendment](2026-07-11-little-internet-stage-1-amendment.md).
+> The amendment changes the participant population, assistance semantics,
+> baseline and delayed forms, rubric, and custody contract. It does **not**
+> change the locked immediate different-`/24` case. No learner run occurred
+> before the amendment.
 
 ## Why this document exists
 
