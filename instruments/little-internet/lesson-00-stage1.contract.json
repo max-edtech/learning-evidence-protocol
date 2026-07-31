@@ -1,0 +1,91 @@
+{
+  "protocolVersion": "0.1.0",
+  "lessonId": "networking.lesson-00.stage1-amended",
+  "title": "Lesson 00 Stage 1 — link-up is not IPv4 reachability (amended, pre-data)",
+  "learningClaim": "Bounded to the observed participant, frozen forms and uncontrolled assistance condition: two directly connected, UP interfaces assigned to different on-link IPv4 prefixes have no direct IPv4 reachability without a router or static route, and the participant can locate and explain that condition on a changed case and on a fresh delayed case.",
+  "scenario": {
+    "initialState": "Two directly connected virtual interfaces are UP and link-local traffic is visible, but neither interface has an IPv4 address. No Lesson 00 output or causal explanation has been shown.",
+    "learnerTask": "Lock a T0 baseline prediction, complete little-internet Lesson 00 in virtual mode, then respond to an immediate changed case and, 72-96 hours later, to a fresh delayed transfer case.",
+    "environmentNotes": [
+      "Upstream lesson: ngrok/little-internet virtual path pinned to commit afa93c7; the upstream course is never modified.",
+      "All prompts below are copied verbatim from the frozen forms in research/2026-07-11-little-internet-stage-1-amendment.md (commit ccda72e707250fdd8ae68e7c6e09eed179f6c67c); this contract may not alter them.",
+      "Assistance condition is uncontrolled; language, navigation, facilitator and visible-AI help are logged as bounded events. External AI use is not observable.",
+      "The delayed transfer stage is admissible only inside the 72-96 hour window measured from the immediate form's response lock, enforced fail-closed by the capture instrument's clock policy."
+    ]
+  },
+  "evidenceStages": [
+    {
+      "id": "form-a.t0-baseline",
+      "kind": "prediction",
+      "prompt": "Before running a command: should IPv4 ping to `10.10.0.2` work in this state? What condition would you inspect first, and why might a live link still be insufficient?",
+      "expectedEvidence": [
+        "A direct participant response locked before commands, feedback, AI output or conceptual help.",
+        "The response is recorded as a diagnostic baseline only."
+      ],
+      "evaluation": {
+        "method": "human-rubric",
+        "passCondition": "T0 is a locked baseline for diagnosis; it is never scored as retained learning and has no pass/fail disposition."
+      }
+    },
+    {
+      "id": "observe.lesson-00-virtual",
+      "kind": "observation",
+      "prompt": "Run little-internet Lesson 00 in virtual mode at upstream commit afa93c7. Navigation and literal language clarification are permitted and logged; conceptual explanations are not volunteered before the participant's own explanation step.",
+      "expectedEvidence": [
+        "The participant executes the Lesson 00 command sequence; completion is recorded from the bound isolated terminal trace.",
+        "Observed assistance is appended as events while it occurs."
+      ],
+      "evaluation": {
+        "method": "hybrid",
+        "passCondition": "Completion is established by the digest-bound terminal trace. Lesson completion and system output never substitute for a learner response."
+      },
+      "systemArtifacts": [
+        "isolated terminal trace digest",
+        "interface state",
+        "ping results"
+      ]
+    },
+    {
+      "id": "form-b.immediate-changed-case",
+      "kind": "explanation",
+      "prompt": "Before running a command: will these endpoints have direct IPv4 reachability? Explain why everything can look connected while ping still fails. Then name the first diagnostic check you would run.",
+      "expectedEvidence": [
+        "Setup shown: after Lesson 00 the lab is reset; `10.10.0.1/24` on one directly connected endpoint and `10.20.0.2/24` on the other; both interfaces UP; no router, gateway or added static route; ping fails.",
+        "Prediction and explanation are locked before diagnostic commands or feedback; the subsequent isolated terminal/system trace is bound separately."
+      ],
+      "evaluation": {
+        "method": "human-rubric",
+        "passCondition": "Rubric v1, all four conditions required: (1) predicts direct IPv4 reachability fails in the stated no-router/no-static-route topology; (2) locates the failure at IPv4 addressing, on-link prefix or route selection rather than physical/link state; (3) explains that each endpoint treats the peer as off-link and no route/router exists to forward traffic; (4) checks IPv4 address/prefix and route state before latency, restart, application or physical replacement."
+      }
+    },
+    {
+      "id": "form-c.delayed-fresh-transfer",
+      "kind": "transfer",
+      "prompt": "Before running a command: should these endpoints have direct IPv4 reachability? Explain the relevant network condition and what you would check first. Do not rely on remembering the earlier addresses.",
+      "expectedEvidence": [
+        "Setup shown: two directly connected virtual interfaces UP; endpoint A `192.0.2.10/25`; endpoint B `192.0.2.200/25`; no router, gateway or added static route.",
+        "Administered 72-96 hours after the immediate form without showing the prior answer, transcript or rubric."
+      ],
+      "evaluation": {
+        "method": "human-rubric",
+        "passCondition": "Rubric v1, all four conditions applied independently of Form B. A missing, late, near-copy-contaminated or prematurely revealed probe is not-run or review, never learner failure and never retention evidence."
+      }
+    }
+  ],
+  "successRule": {
+    "requiredStageIds": [
+      "form-a.t0-baseline",
+      "observe.lesson-00-virtual",
+      "form-b.immediate-changed-case",
+      "form-c.delayed-fresh-transfer"
+    ],
+    "reviewPolicy": "Rubric v1 dispositions are pass/fail/review/not-run per form. Ambiguous language, contaminated evidence, incomplete evaluator authority or conflicting sources stay review. Without the named and authorized review required by the accepted governance packet, all results are capped at review. A delayed transfer captured outside the 72-96 hour window is not admissible as delayed evidence and is recorded not-run. Missing delayed evidence is missing, not failure."
+  },
+  "provenance": {
+    "author": "max-edtech",
+    "license": "MPL-2.0",
+    "sourceUrl": "https://github.com/max-edtech/learning-evidence-protocol/blob/ccda72e707250fdd8ae68e7c6e09eed179f6c67c/research/2026-07-11-little-internet-stage-1-amendment.md",
+    "sourceCommit": "ccda72e707250fdd8ae68e7c6e09eed179f6c67c",
+    "notes": "Instrument-facing contract for the Stage 1 amended design. Prompts are verbatim copies of frozen forms A/B/C; the rubric text restates frozen rubric v1. Upstream lesson ngrok/little-internet pinned to afa93c7 (virtual path). Captured by instruments/little-internet/capture.mjs (two-session flow with fail-closed 72-96h window). This contract changes no upstream material and authorizes no run by itself; recruitment, scheduling and capture remain gated by the exact-run governance packet."
+  }
+}

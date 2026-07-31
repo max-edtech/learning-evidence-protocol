@@ -5,7 +5,9 @@
   "description": "Schemas and examples for observable learning evidence.",
   "type": "module",
   "scripts": {
-    "test": "node scripts/validate-examples.mjs"
+    "test": "node scripts/validate-examples.mjs && node --test instruments/little-internet/test/capture.test.mjs",
+    "test:examples": "node scripts/validate-examples.mjs",
+    "test:instruments": "node --test instruments/little-internet/test/capture.test.mjs"
   },
   "devDependencies": {
     "ajv": "8.20.0",

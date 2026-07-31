@@ -19,6 +19,8 @@ inspectable evidence.
 - [Lesson contract schema](./schema/lesson-contract.schema.json)
 - [Run evidence schema](./schema/run-evidence.schema.json)
 - [Networking Lesson 00 example](./examples/networking-lesson-00.contract.json)
+- [Phase 0 field report: Apple Silicon → Colima → Lesson 00](./research/2026-06-29-little-internet-phase-0.md)
+- [Phase 0 follow-up: latest upstream rerun and coupling boundary](./research/2026-06-30-little-internet-phase-0-rerun.md)
 
 ## The evidence loop
 
@@ -90,6 +92,11 @@ The first goal is not adoption at scale. It is to discover whether the same
 evidence contract can describe learning in more than one domain without erasing
 what makes each domain meaningful.
 
+The first field run reached an intentionally mixed verdict: the virtual lab was
+technically reproducible, while the learning claim remained `review` because no
+valid learner prediction, explanation, or transfer evidence was collected. That
+distinction is the point of the protocol.
+
 ## Acknowledgements
 
 The first example was inspired by
@@ -104,4 +111,3 @@ packet captures.
 Mozilla Public License 2.0. Changes to MPL-covered files remain open when
 distributed, while separate files may be combined into larger proprietary
 systems.
-
